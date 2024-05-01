@@ -4,7 +4,7 @@ Fork of ariya's ask-llm [[https://github.com/ariya/ask-llm]]
 
 point is : trying to force standard JSON ouput while maximising temperature (creativity) 
 
-it needs  Linux Shell + Python version v3.10 or higher.
+it needs  Linux Shell + Python version v3.10 or higher + jq (CLI JSON parsing tool)
 
 ```
 git clone https://github.com/GG-off/poked/
