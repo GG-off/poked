@@ -15,7 +15,9 @@ export LLM_API_KEY="[YOUR_OWN_FREE_GROQ_API_KEY]"
 ```
 ### known problems and few solutions
 - hallucinate, like giving parasect with bug+fire type
+- easy prompt injection (any text can be taken as input aside from numbers in decimals or letters)
 - did I tell it hallucinates illustation links ? Like this one : https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/653.svg"
+-- oh wait it works sometimes : https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg
 - not random, no seed controle
 - can have trouble generating end of JSON output
 -- with 200 tokens it was almost always broken, with maximum token it will broke when very big list asked
