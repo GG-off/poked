@@ -5,9 +5,11 @@ import json
 import urllib.request
 import time
 
-LLM_API_BASE_URL = os.environ.get("LLM_API_BASE_URL", "https://api.openai.com/v1")
-LLM_API_KEY = os.environ.get("LLM_API_KEY") or os.environ.get("OPENAI_API_KEY")
-LLM_CHAT_MODEL = os.environ.get("LLM_CHAT_MODEL")
+LLM_API_BASE_URL = os.environ.get("LLM_API_BASE_URL", "https://api.groq.com/openai/v1")
+LLM_API_KEY = os.environ.get("LLM_API_KEY") or os.environ.get("GROQ_API_KEY")
+LLM_CHAT_MODEL = os.environ.get("LLM_CHAT_MODEL","mixtral-8x7b-32768")
+
+SYSTEM_PROMPT = os.environ.get("LLM_SYSTEM_PROMPT")
 
 LLM_DEBUG = os.environ.get("LLM_DEBUG")
 
@@ -23,9 +25,9 @@ def chat(messages):
         headers["Authorization"] = auth_header
     body = {
         "messages": messages,
-        "model": LLM_CHAT_MODEL or "gpt-3.5-turbo",
-        "max_tokens": 200,
-        "temperature": 0,
+        "model": LLM_CHAT_MODEL,
+        "max_tokens": 10000,
+        "temperature": 0.5,
     }
     json_body = json.dumps(body).encode("utf-8")
     request = urllib.request.Request(url, data=json_body, headers=headers, method="POST")
@@ -40,20 +42,16 @@ def chat(messages):
     answer = content.strip()
     return answer
 
-
-SYSTEM_PROMPT = "Answer the question politely and concisely."
-
-
 def main():
-    print(f"Using LLM at {LLM_API_BASE_URL}.")
-    print("Press Ctrl+D to exit.")
-    print()
+    # print(f"Using {LLM_CHAT_MODEL} LLM at {LLM_API_BASE_URL}.")
+    # print("Don't abuse please.")
+    # print()
 
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     while True:
         try:
-            question = input(">> ")
+            question = input("")
         except EOFError:
             break
 
