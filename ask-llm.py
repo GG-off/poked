@@ -7,12 +7,14 @@ import time
 
 LLM_API_BASE_URL = os.environ.get("LLM_API_BASE_URL", "https://api.groq.com/openai/v1")
 LLM_API_KEY = os.environ.get("LLM_API_KEY") or os.environ.get("GROQ_API_KEY")
-LLM_CHAT_MODEL = os.environ.get("LLM_CHAT_MODEL","mixtral-8x7b-32768")
+LLM_CHAT_MODEL = os.environ.get("LLM_CHAT_MODEL", "mixtral-8x7b-32768")
 
+MAX_TOKENS = int(os.environ.get("LLM_MAX_TOKENS", 12000))
+# SEED = int(os.environ.get("LLM_SEED")) # problème si j'active ça j'ai aucune valeur pour retourner à void pour que ce soit random
+TEMPERATURE = float(os.environ.get("LLM_TEMPERATURE", 0))
 SYSTEM_PROMPT = os.environ.get("LLM_SYSTEM_PROMPT")
 
 LLM_DEBUG = os.environ.get("LLM_DEBUG")
-
 
 def chat(messages):
     url = f"{LLM_API_BASE_URL}/chat/completions"
@@ -26,8 +28,9 @@ def chat(messages):
     body = {
         "messages": messages,
         "model": LLM_CHAT_MODEL,
-        "max_tokens": 10000,
-        "temperature": 0.5,
+        "max_tokens": MAX_TOKENS,
+        "temperature": TEMPERATURE,
+		# "seed": SEED, # problème si j'active ça j'ai aucune valeur pour retourner à void pour que ce soit random
     }
     json_body = json.dumps(body).encode("utf-8")
     request = urllib.request.Request(url, data=json_body, headers=headers, method="POST")
