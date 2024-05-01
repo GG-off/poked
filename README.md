@@ -1,6 +1,8 @@
-# poked ~ straightforward zero-dependency AI POWERED POKEDEX-LIKE CLI TOOL
+# poked ~ straightforward zero-dependency AI POWERED CLI POKEDEX (o)
 
 Fork of ariya's ask-llm [[https://github.com/ariya/ask-llm]]
+
+point is : trying to force standard JSON ouput while maximising temperature (creativity) 
 
 it needs  Linux Shell + Python version v3.10 or higher.
 
@@ -11,12 +13,15 @@ chmod +x agent.sh
 export LLM_API_KEY="[YOUR_OWN_FREE_GROQ_API_KEY]"
 ./agent.sh [number_of_fire_pokemon_you_want_to_be_serve_with_in_the_JSON_FILE]
 ```
-### known problems :
+### known problems and few solutions
 - hallucinate, like giving parasect with bug+fire type
-- can have trouble with the end, few options to fix all possible 
+- not random, no seed controle
+- can have trouble generating end of JSON output
 -- with 200 tokens it was almost always broken, with maximum token it will broke when very big list asked
 -- and broke randomly because AI lol
-  
+--> automated options do exist to fix it but should only be use if you have the motivation ton build it (i don't)
+--> OR a second agent correcting the ouput adding more error sources ?
+
 ### to do :
 - alias poked
 - few ideas lol
