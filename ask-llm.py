@@ -30,6 +30,12 @@ def chat(messages):
         "model": LLM_CHAT_MODEL,
         "max_tokens": MAX_TOKENS,
         "temperature": TEMPERATURE,
+		"response_format": {
+			"type": "json_object"
+		},
+	    "top_p": 0.1,
+		"frequency_penalty": 0.9,
+		"presence_penalty": 0.5,
 		# "seed": SEED, # problème si j'active ça j'ai aucune valeur pour retourner à void pour que ce soit random
     }
     json_body = json.dumps(body).encode("utf-8")
